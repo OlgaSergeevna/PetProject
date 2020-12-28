@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">PetProject1</string>
+    <string name="back_end">Back-End</string>
+    <string name="store_front">Store-Front</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_name">Название</string>
+    <string name="text_cost">Цена</string>
+    <string name="text_quantity">Количество</string>
+    <string name="close">Отменить</string>
+    <string name="save">Сохранить</string>
+    <string name="text_edit"><![CDATA[>]]></string>
+    <string name="buy">Купить</string>
+</resources>

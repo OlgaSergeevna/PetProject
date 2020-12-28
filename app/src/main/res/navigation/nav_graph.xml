@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/frontFragment">
+
+    <fragment
+        android:id="@+id/backFragment"
+        android:name="com.sylko.petproject1.screen.back.BackFragment"
+        android:label="fragment_back"
+        tools:layout="@layout/fragment_back" >
+        <action
+            android:id="@+id/action_backFragment_to_editorFragment2"
+            app:destination="@id/editorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/frontFragment"
+        android:name="com.sylko.petproject1.screen.front.FrontFragment"
+        android:label="fragment_front"
+        tools:layout="@layout/fragment_front" />
+    <fragment
+        android:id="@+id/editorFragment"
+        android:name="com.sylko.petproject1.screen.editor.EditorFragment"
+        android:label="fragment_editor"
+        tools:layout="@layout/fragment_editor" />
+</navigation>
