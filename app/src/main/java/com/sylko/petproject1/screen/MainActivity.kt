@@ -13,7 +13,7 @@ import com.sylko.petproject1.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    var navController: NavController? = null
+    private var navController: NavController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,9 +24,8 @@ class MainActivity : AppCompatActivity() {
 
         navController = Navigation.findNavController(this, R.id.nav_host_fragment)
 
-        binding.btnBack.setOnClickListener { navController!!.navigate(R.id.backFragment) }
+        binding.btnBack.setOnClickListener { navController?.navigate(R.id.backFragment) }
 
-        binding.btnFront.setOnClickListener { navController!!.navigate(R.id.frontFragment) }
-
+        binding.btnFront.setOnClickListener { navController?.navigate(R.id.frontFragment) }
     }
 }

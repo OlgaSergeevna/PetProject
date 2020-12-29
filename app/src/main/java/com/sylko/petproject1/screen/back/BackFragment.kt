@@ -2,11 +2,9 @@ package com.sylko.petproject1.screen.back
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.*
 import com.sylko.petproject1.R
@@ -18,16 +16,16 @@ import com.sylko.petproject1.databinding.FragmentBackBinding
  */
 class BackFragment : Fragment(R.layout.fragment_back), BackFragmentAdapter.onItemClickListener {
 
-    var mViewModel: BackFragmentViewModel? = null
-    lateinit var recyclerView: RecyclerView
+    private var viewModel: BackFragmentViewModel? = null
+    private lateinit var recyclerView: RecyclerView
     private lateinit var binding: FragmentBackBinding
-    var adapter: BackFragmentAdapter? = null
+    private var adapter: BackFragmentAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentBackBinding.bind(view)
 
-        mViewModel = ViewModelProvider(this).get(BackFragmentViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(BackFragmentViewModel::class.java)
 
         binding.btnOpenEditor.setOnClickListener {
             NavHostFragment.findNavController(this).navigate(R.id.action_backFragment_to_editorFragment2) }
@@ -45,7 +43,7 @@ class BackFragment : Fragment(R.layout.fragment_back), BackFragmentAdapter.onIte
     }
 
     private fun observeLiveData() {
-        mViewModel?.getAllSaleList()?.observe(viewLifecycleOwner, { data ->
+        viewModel?.getAllSaleList()?.observe(viewLifecycleOwner, { data ->
             initAdapter(data)
         })
     }

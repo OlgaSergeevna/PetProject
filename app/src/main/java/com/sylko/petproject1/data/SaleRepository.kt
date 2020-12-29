@@ -1,7 +1,6 @@
 package com.sylko.petproject1.data
 
 import android.app.Application
-import androidx.lifecycle.LiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,7 +15,7 @@ class SaleRepository (application: Application) : CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-    var saleDao: SaleDao = SaleDatabase.getInstance(application).saleDao()
+    private var saleDao: SaleDao = SaleDatabase.getInstance(application).saleDao()
 
     fun observeAll() = saleDao.observeAll()
 

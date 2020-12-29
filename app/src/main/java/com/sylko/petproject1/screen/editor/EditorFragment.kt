@@ -3,6 +3,7 @@ package com.sylko.petproject1.screen.editor
 import android.os.Bundle
 import android.text.InputType
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.sylko.petproject1.R
@@ -17,7 +18,7 @@ import java.util.*
 class EditorFragment : Fragment(R.layout.fragment_editor) {
 
     private lateinit var binding: FragmentEditorBinding
-    var viewModelBack: BackFragmentViewModel? = null
+    private var viewModelBack: BackFragmentViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,9 +31,9 @@ class EditorFragment : Fragment(R.layout.fragment_editor) {
 
         binding = FragmentEditorBinding.bind(view)
 
-        //ввод только чисел
         binding.etCost.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
         binding.etQuantity.inputType = InputType.TYPE_CLASS_NUMBER
+        binding.etName.inputType = InputType.TYPE_CLASS_TEXT
 
         val uid = arguments?.get("KEY_UID")?: UUID.randomUUID().toString()
         val name = arguments?.get("KEY_NAME")
@@ -47,16 +48,26 @@ class EditorFragment : Fragment(R.layout.fragment_editor) {
 
         binding.btnSave.setOnClickListener {
 
-            viewModelBack?.insertSale(
-                    Sale(
-                            uid as String,
-                            binding.etName.text.toString(),
-                            binding.etCost.text.toString().toDouble(),
-                            binding.etQuantity.text.toString().toInt()
-                    )
-            )
-            activity?.onBackPressed()
+            if (checkTheEnteredValues()) {
+                Toast.makeText(context, "Все поля должны быть заполнены!", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                viewModelBack?.insertSale(
+                        Sale(
+                                uid as String,
+                                binding.etName.text.toString(),
+                                binding.etCost.text.toString().toDouble(),
+                                binding.etQuantity.text.toString().toInt()
+                        )
+                )
+                activity?.onBackPressed()
+            }
         }
+    }
 
+    private fun checkTheEnteredValues(): Boolean{
+        return ((binding.etName.text.isEmpty()) ||
+                (binding.etCost.text.isEmpty()) ||
+                (binding.etQuantity.text.isEmpty()))
     }
 }

@@ -1,18 +1,10 @@
 package com.sylko.petproject1.screen.back
 
 import android.app.Application
-import android.text.TextUtils
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.sylko.petproject1.data.Sale
-import com.sylko.petproject1.data.SaleDatabase
 import com.sylko.petproject1.data.SaleRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.util.*
-import kotlin.collections.ArrayList
 
 /**
  * ViewModel для списка товаров (back)

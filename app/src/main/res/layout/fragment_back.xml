@@ -23,5 +23,6 @@
         android:clickable="true"
         android:src="@android:drawable/ic_menu_add"
         app:backgroundTint="@color/white"
-        app:maxImageSize="68dp" />
+        app:maxImageSize="68dp"
+        tools:ignore="ContentDescription" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
