@@ -22,7 +22,6 @@ class EditorFragment : Fragment(R.layout.fragment_editor) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         viewModelBack = ViewModelProvider(this).get(BackFragmentViewModel::class.java)
     }
 
