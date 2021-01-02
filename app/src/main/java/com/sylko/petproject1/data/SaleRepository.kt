@@ -23,11 +23,20 @@ class SaleRepository (application: Application) : CoroutineScope {
         launch { insertSaleSuspend(sale) }
     }
 
+    fun updateSale(sale: Sale) {
+        launch { updateSaleSuspend(sale) }
+    }
+
     fun observePositive() = saleDao.observePositive()
 
     private suspend fun insertSaleSuspend(sale: Sale) {
         withContext(Dispatchers.IO) {
             saleDao.insertSale(sale)
+        }
+    }
+    private suspend fun updateSaleSuspend(sale: Sale) {
+        withContext(Dispatchers.IO) {
+            saleDao.updateSale(sale)
         }
     }
 }

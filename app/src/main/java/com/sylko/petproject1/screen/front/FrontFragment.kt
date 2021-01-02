@@ -15,13 +15,14 @@ import com.sylko.petproject1.screen.back.BackFragmentViewModel
 /**
  * Основной пользовательский интерфейс для покупки товаров (front)
  */
-class FrontFragment : Fragment(R.layout.fragment_front), FrontFragmentAdapter.onItemClickListener {
+class FrontFragment : Fragment(R.layout.fragment_front), FrontFragmentAdapter.OnItemClickListener {
 
     private lateinit var binding: FragmentFrontBinding
     private var viewModelBack: BackFragmentViewModel? = null
     private var viewModel: FrontFragmentViewModel? = null
     private lateinit var recyclerView: RecyclerView
     private var adapter: FrontFragmentAdapter? = null
+    private var currentPosition : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,6 +58,7 @@ class FrontFragment : Fragment(R.layout.fragment_front), FrontFragmentAdapter.on
         adapter = FrontFragmentAdapter(data, this)
         recyclerView.adapter = adapter
         recyclerView.onFlingListener = null
+        recyclerView.scrollToPosition(currentPosition)
         viewModel?.attachSnapHelper()?.attachToRecyclerView(recyclerView)
     }
 
@@ -67,7 +69,9 @@ class FrontFragment : Fragment(R.layout.fragment_front), FrontFragmentAdapter.on
         val cost = adapter?.getCost(position)
         val num = adapter?.getNum(position)
 
-        viewModelBack?.insertSale(
+        currentPosition = position
+
+        viewModelBack?.updateSale(
                 Sale(
                         uid as String,
                         name as String,
@@ -75,6 +79,6 @@ class FrontFragment : Fragment(R.layout.fragment_front), FrontFragmentAdapter.on
                         ((num as Int) - 1)
                 )
         )
-        observeLiveData()
+
     }
 }

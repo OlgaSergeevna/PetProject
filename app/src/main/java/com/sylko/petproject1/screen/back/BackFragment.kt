@@ -14,7 +14,7 @@ import com.sylko.petproject1.databinding.FragmentBackBinding
 /**
  * Основной пользовательский интерфейс списка товаров (back)
  */
-class BackFragment : Fragment(R.layout.fragment_back), BackFragmentAdapter.onItemClickListener {
+class BackFragment : Fragment(R.layout.fragment_back), BackFragmentAdapter.OnItemClickListener {
 
     private var viewModel: BackFragmentViewModel? = null
     private lateinit var recyclerView: RecyclerView

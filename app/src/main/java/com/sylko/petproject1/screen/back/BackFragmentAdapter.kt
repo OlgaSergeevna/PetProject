@@ -13,7 +13,7 @@ import com.sylko.petproject1.databinding.OneItemBinding
  */
 class BackFragmentAdapter(
         private  val saleList: List<Sale>,
-        private val listener: onItemClickListener
+        private val listener: OnItemClickListener
 ) :
         RecyclerView.Adapter<BackFragmentAdapter.ViewHolder>(){
 
@@ -28,7 +28,6 @@ class BackFragmentAdapter(
 
         holder.name.text = currentSale.name
         holder.num.text = currentSale.num.toString()
-
     }
 
     override fun getItemCount() = saleList.size
@@ -38,9 +37,10 @@ class BackFragmentAdapter(
 
         val name = binding.tvName
         val num = binding.tvNum
+        private val cv = binding.root
 
         init {
-            name.setOnClickListener(this)
+            cv.setOnClickListener(this)
         }
 
         override fun onClick(v: View?) {
@@ -67,7 +67,7 @@ class BackFragmentAdapter(
         return saleList[position].num
     }
 
-    interface onItemClickListener{
+    interface OnItemClickListener{
         fun onItemClick(position: Int)
     }
 

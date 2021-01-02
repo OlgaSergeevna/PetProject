@@ -22,6 +22,7 @@ class EditorFragment : Fragment(R.layout.fragment_editor) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
         viewModelBack = ViewModelProvider(this).get(BackFragmentViewModel::class.java)
     }
 
@@ -33,6 +34,8 @@ class EditorFragment : Fragment(R.layout.fragment_editor) {
         binding.etCost.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
         binding.etQuantity.inputType = InputType.TYPE_CLASS_NUMBER
         binding.etName.inputType = InputType.TYPE_CLASS_TEXT
+
+        var new = (arguments?.get("KEY_UID")==null)
 
         val uid = arguments?.get("KEY_UID")?: UUID.randomUUID().toString()
         val name = arguments?.get("KEY_NAME")
@@ -51,6 +54,7 @@ class EditorFragment : Fragment(R.layout.fragment_editor) {
                 Toast.makeText(context, "Все поля должны быть заполнены!", Toast.LENGTH_SHORT).show()
             }
             else {
+                if (new){
                 viewModelBack?.insertSale(
                         Sale(
                                 uid as String,
@@ -58,7 +62,14 @@ class EditorFragment : Fragment(R.layout.fragment_editor) {
                                 binding.etCost.text.toString().toDouble(),
                                 binding.etQuantity.text.toString().toInt()
                         )
-                )
+                )}
+                else {viewModelBack?.updateSale(
+                        Sale(
+                                uid as String,
+                                binding.etName.text.toString(),
+                                binding.etCost.text.toString().toDouble(),
+                                binding.etQuantity.text.toString().toInt()
+                        ))}
                 activity?.onBackPressed()
             }
         }

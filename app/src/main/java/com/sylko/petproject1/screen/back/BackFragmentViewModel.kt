@@ -27,4 +27,9 @@ class BackFragmentViewModel(application: Application): AndroidViewModel(applicat
         repository?.insertSale(sale)
     }
 
+    fun updateSale(sale: Sale){
+        repository?.updateSale(sale)
+    }
+
+
 }

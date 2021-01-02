@@ -12,10 +12,10 @@ import com.sylko.petproject1.databinding.OneItemFrontBinding
  * Адаптер для списка товаров (front)
  */
 class FrontFragmentAdapter(
-        private  val saleList: List<Sale>,
-        private val listener: onItemClickListener
+        private val saleList: List<Sale>,
+        private val listener: OnItemClickListener
 ) :
-        RecyclerView.Adapter<FrontFragmentAdapter.ViewHolder>(){
+        RecyclerView.Adapter<FrontFragmentAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.one_item_front, parent, false)
@@ -33,7 +33,7 @@ class FrontFragmentAdapter(
 
     override fun getItemCount() = saleList.size
 
-    inner class ViewHolder(view : View) : RecyclerView.ViewHolder(view), View.OnClickListener{
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener{
         private val binding = OneItemFrontBinding.bind(view)
 
         val name = binding.nameFront
@@ -46,6 +46,7 @@ class FrontFragmentAdapter(
         }
 
         override fun onClick(v: View?) {
+
             val position : Int = adapterPosition
             if (position != RecyclerView.NO_POSITION) {
                 listener.onItemClick(position)
@@ -69,7 +70,7 @@ class FrontFragmentAdapter(
         return saleList[position].num
     }
 
-    interface onItemClickListener{
+    interface OnItemClickListener {
         fun onItemClick(position: Int)
     }
 
