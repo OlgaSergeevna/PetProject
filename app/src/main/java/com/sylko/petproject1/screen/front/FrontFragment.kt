@@ -29,7 +29,6 @@ class FrontFragment : Fragment(R.layout.fragment_front), FrontFragmentAdapter.On
 
         viewModelBack = ViewModelProvider(this).get(BackFragmentViewModel::class.java)
         viewModel = ViewModelProvider(this).get(FrontFragmentViewModel::class.java)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

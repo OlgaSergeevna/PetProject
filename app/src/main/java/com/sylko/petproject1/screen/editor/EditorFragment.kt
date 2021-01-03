@@ -10,6 +10,7 @@ import com.sylko.petproject1.R
 import com.sylko.petproject1.data.Sale
 import com.sylko.petproject1.databinding.FragmentEditorBinding
 import com.sylko.petproject1.screen.back.BackFragmentViewModel
+import com.sylko.petproject1.util.DecimalDigitsInputFilter
 import java.util.*
 
 /**
@@ -19,6 +20,8 @@ class EditorFragment : Fragment(R.layout.fragment_editor) {
 
     private lateinit var binding: FragmentEditorBinding
     private var viewModelBack: BackFragmentViewModel? = null
+    private var new: Boolean = null == true
+    private var uid: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,20 +34,8 @@ class EditorFragment : Fragment(R.layout.fragment_editor) {
 
         binding = FragmentEditorBinding.bind(view)
 
-        binding.etCost.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
-        binding.etQuantity.inputType = InputType.TYPE_CLASS_NUMBER
-        binding.etName.inputType = InputType.TYPE_CLASS_TEXT
-
-        var new = (arguments?.get("KEY_UID")==null)
-
-        val uid = arguments?.get("KEY_UID")?: UUID.randomUUID().toString()
-        val name = arguments?.get("KEY_NAME")
-        val cost = arguments?.get("KEY_COST")
-        val num = arguments?.get("KEY_NUM")
-
-        binding.etName.setText(name?.toString())
-        binding.etCost.setText(cost?.toString())
-        binding.etQuantity.setText(num?.toString())
+        inputFilters()
+        getAndSetBundle()
 
         binding.btnClose.setOnClickListener { activity?.onBackPressed() }
 
@@ -80,4 +71,26 @@ class EditorFragment : Fragment(R.layout.fragment_editor) {
                 (binding.etCost.text.isEmpty()) ||
                 (binding.etQuantity.text.isEmpty()))
     }
+
+    private fun inputFilters(){
+        binding.etCost.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_FLAG_DECIMAL
+        binding.etCost.filters = arrayOf(DecimalDigitsInputFilter(2))
+        binding.etQuantity.inputType = InputType.TYPE_CLASS_NUMBER
+        binding.etName.inputType = InputType.TYPE_CLASS_TEXT
+    }
+
+    private fun getAndSetBundle(){
+        new = (arguments?.get("KEY_UID")==null)
+
+        uid = (arguments?.get("KEY_UID")?: UUID.randomUUID().toString()) as String?
+        val name = arguments?.get("KEY_NAME")
+        val cost = arguments?.get("KEY_COST")
+        val num = arguments?.get("KEY_NUM")
+
+        binding.etName.setText(name?.toString())
+        binding.etCost.setText(cost?.toString())
+        binding.etQuantity.setText(num?.toString())
+    }
+
 }
+

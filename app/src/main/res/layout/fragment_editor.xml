@@ -50,6 +50,7 @@
         android:layout_marginTop="8dp"
         android:autofillHints="0.00"
         android:contentDescription="@string/text_cost"
+        android:maxLength="9"
         android:inputType="number"
         android:labelFor="@id/text_cost"
         android:textSize="24sp"
@@ -78,6 +79,7 @@
         android:inputType="number"
         android:labelFor="@id/text_quantity"
         android:textSize="24sp"
+        android:maxLength="9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_quantity" />

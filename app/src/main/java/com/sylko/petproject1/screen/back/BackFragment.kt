@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.*
+import androidx.recyclerview.widget.RecyclerView
 import com.sylko.petproject1.R
 import com.sylko.petproject1.data.Sale
 import com.sylko.petproject1.databinding.FragmentBackBinding
+
 
 /**
  * Основной пользовательский интерфейс списка товаров (back)
@@ -34,6 +36,17 @@ class BackFragment : Fragment(R.layout.fragment_back), BackFragmentAdapter.OnIte
 
         initView()
         observeLiveData()
+
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0 || dy < 0 && binding.btnOpenEditor.isShown) binding.btnOpenEditor.hide()
+            }
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) binding.btnOpenEditor.show()
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+        })
     }
 
     private fun initView() {
